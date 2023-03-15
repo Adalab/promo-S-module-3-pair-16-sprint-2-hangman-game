@@ -6,7 +6,7 @@ import getWordFromApi from "../services/api";
 import "../styles/App.scss";
 import "../styles/Dummy.scss";
 
-
+import "../styles/Form.scss";
 import "../styles/Header.scss";
 import Header from "./Header.js";
 import Dummy from "./Dummy.js";
@@ -28,15 +28,7 @@ function App() {
   // events
 
   
-  const handleLastLetter = (value) => {
-    value = value.toLocaleLowerCase();
-    setLastLetter(value);
 
-    if (!userLetters.includes(value)) {
-      userLetters.push(value);
-      setUserLetters([...userLetters]);
-    }
-  };
   
 
   const getNumberOfErrors = () => {
@@ -61,7 +53,7 @@ function App() {
         <section>
           <SolutionLetters word={word} userLetters={userLetters}/>
          <ErrorLetters word={word} userLetters={userLetters}/>
-          <Form handleLastLetter={handleLastLetter} lastLetter={lastLetter}/>
+          <Form />
         </section>
         <Dummy numberOfErrors={getNumberOfErrors()} />
       </main>

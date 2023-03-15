@@ -1,5 +1,7 @@
 import "../styles/Letters.scss";
 
+
+
 const SolutionLetters = ({ word, userLetters }) => {
   const renderSolutionLetters = () => {
     const wordLetters = word.split("");
@@ -15,7 +17,7 @@ const SolutionLetters = ({ word, userLetters }) => {
   return (
     <div className="solution">
       <h2 className="title">Solución:</h2>
-      <ul className="letters">{renderSolutionLetters()}</ul>
+      <ul className="letters">{renderSolutionLetters(word, userLetters)}</ul>
     </div>
   );
 };

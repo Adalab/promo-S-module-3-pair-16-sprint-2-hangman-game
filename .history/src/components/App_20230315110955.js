@@ -6,7 +6,7 @@ import getWordFromApi from "../services/api";
 import "../styles/App.scss";
 import "../styles/Dummy.scss";
 
-
+import "../styles/Form.scss";
 import "../styles/Header.scss";
 import Header from "./Header.js";
 import Dummy from "./Dummy.js";
@@ -27,17 +27,21 @@ function App() {
 
   // events
 
-  
-  const handleLastLetter = (value) => {
-    value = value.toLocaleLowerCase();
-    setLastLetter(value);
+  const handleKeyDown = (ev) => {
+    // Sabrías decir para qué es esta línea
+    ev.target.setSelectionRange(0, 1);
+  };
 
-    if (!userLetters.includes(value)) {
-      userLetters.push(value);
-      setUserLetters([...userLetters]);
+  const handleChange = (ev) => {
+    let re = /^[a-zA-ZñÑá-úÁ-Ú´]$/; //add regular pattern
+    if (re.test(ev.target.value) || ev.target.value === "") {
+      handleLastLetter(ev.target.value);
     }
   };
-  
+
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+  };
 
   const getNumberOfErrors = () => {
     const errorLetters = userLetters.filter(
@@ -50,7 +54,15 @@ function App() {
 
   
 
-  
+  const handleLastLetter = (value) => {
+    value = value.toLocaleLowerCase();
+    setLastLetter(value);
+
+    if (!userLetters.includes(value)) {
+      userLetters.push(value);
+      setUserLetters([...userLetters]);
+    }
+  };
 
   const number = getNumberOfErrors();
 
@@ -61,7 +73,7 @@ function App() {
         <section>
           <SolutionLetters word={word} userLetters={userLetters}/>
          <ErrorLetters word={word} userLetters={userLetters}/>
-          <Form handleLastLetter={handleLastLetter} lastLetter={lastLetter}/>
+          <Form />
         </section>
         <Dummy numberOfErrors={getNumberOfErrors()} />
       </main>
